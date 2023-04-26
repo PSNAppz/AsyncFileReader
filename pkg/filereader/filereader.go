@@ -1,7 +1,7 @@
 package filereader
 
 import (
-	"io/ioutil"
+	"os"
 	"sync"
 )
 
@@ -15,7 +15,7 @@ func ReadFilesAsync(filePaths []string) ([]string, error) {
 		go func(index int, filePath string) {
 			defer wg.Done()
 
-			content, err := ioutil.ReadFile(filePath)
+			content, err := os.ReadFile(filePath)
 			if err != nil {
 				errors <- err
 				return
